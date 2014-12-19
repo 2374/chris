@@ -42,9 +42,9 @@ public class RobotTemplate extends SimpleRobot {
      */
     public void autonomous() {
         drivetrain.set(1, 1);
-        sleep(1000);
+        sleep(5000);
         drivetrain.set(0,0);
-        arm.auto();
+      //  arm.auto();
     }
 
     /**
@@ -74,9 +74,7 @@ public class RobotTemplate extends SimpleRobot {
                 arm.rampDown();
             } else if (joystick.getRawButton(5)) {
                 arm.rampUp();
-            } else if (joystick.getRawButton(6)) {
-                   arm.auto();
-            } else {
+            }  else {
                 arm.setRamp(0);
             }
             arm.setSolenoid((int) joystick.getRawAxis(6));
