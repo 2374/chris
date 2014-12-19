@@ -23,7 +23,9 @@ public class BowlerArm {
 
     private final int ARM_FORWARD_PORT = 1; //orig 0; corrected to 1
     private final int ARM_BACKWARD_PORT = 2; //orig 0; corrected to 2
-    private final double RAMP_SPEED = 0.5;
+    private final double RAMP_SPEED_UP = 0.75;
+    private final double RAMP_SPEED_DOWN = 0.25;
+
     private final long RAMP_WAIT = 1000;
     private final long ARM_WAIT = 10;
 
@@ -55,39 +57,28 @@ public class BowlerArm {
     }
 
     public void rampDown() {
-        setRamp(-RAMP_SPEED);
-    }
-    //overloaded method used if a different speed than normal is needed
-
-    public void rampDown(double speedOffset) {
-        setRamp(-RAMP_SPEED + speedOffset);
+        setRamp(-RAMP_SPEED_DOWN);
     }
 
     public void rampUp() {
-        setRamp(RAMP_SPEED);
+        setRamp(RAMP_SPEED_UP);
     }
-
-    //overloaded method used if a different speed than normal is needed
-
-    public void rampUp(double speedOffset) {
-        setRamp(RAMP_SPEED + speedOffset);
-
+    public void rampStop(){
+        setRamp(0);
     }
-
+  
     public void auto() {
         //down
-        setRamp(RAMP_SPEED); //verify sign to physical direction!!!!!!!!
+        rampDown(); 
         RobotTemplate.sleep(ARM_WAIT);
-        //to be determined 
-        setRamp(0);
-        //out
-        setSolenoid(1);
-        //out
-
-        //in
+        rampStop();    
+        
+        setSolenoid(1);//out
+ 
         setSolenoid(-1); //in
+ 
         //up
-        setRamp(-RAMP_SPEED); //verify sign to physical direction!!!!!!!!
+        rampUp(); 
         RobotTemplate.sleep(RAMP_WAIT);
         setRamp(0);
     }
