@@ -23,7 +23,7 @@ public class BowlerArm {
 
     private final int ARM_FORWARD_PORT = 1; //orig 0; corrected to 1
     private final int ARM_BACKWARD_PORT = 2; //orig 0; corrected to 2
-    private final double RAMP_SPEED_UP = 0.75;
+    private final double RAMP_SPEED_UP = -0.75;
     private final double RAMP_SPEED_DOWN = 0.25;
 
     private final long RAMP_WAIT = 1000;
@@ -57,7 +57,7 @@ public class BowlerArm {
     }
 
     public void rampDown() {
-        setRamp(-RAMP_SPEED_DOWN);
+        setRamp(RAMP_SPEED_DOWN);
     }
 
     public void rampUp() {
@@ -66,7 +66,7 @@ public class BowlerArm {
     public void rampStop(){
         setRamp(0);
     }
-  
+/*  
     public void auto() {
         //down
         rampDown(); 
@@ -82,5 +82,5 @@ public class BowlerArm {
         RobotTemplate.sleep(RAMP_WAIT);
         setRamp(0);
     }
-
+*/
 }
