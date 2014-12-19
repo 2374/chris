@@ -59,7 +59,7 @@ public class BowlerArm {
     }
     //overloaded method used if a different speed than normal is needed
 
-    public void rampDown(int speedOffset) {
+    public void rampDown(double speedOffset) {
         setRamp(-RAMP_SPEED + speedOffset);
     }
 
@@ -69,7 +69,7 @@ public class BowlerArm {
 
     //overloaded method used if a different speed than normal is needed
 
-    public void rampUp(int speedOffset) {
+    public void rampUp(double speedOffset) {
         setRamp(RAMP_SPEED + speedOffset);
 
     }
