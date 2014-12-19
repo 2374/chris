@@ -33,7 +33,7 @@ public class RobotTemplate extends SimpleRobot {
         drivetrain = new Drivetrain();
         arm = new BowlerArm();
         pan = new Pan();
-        compressor = new Compressor(7, 7);//1 for the switch, 7 for the relay
+        compressor = new Compressor(7, 7);//7 for the switch, 7 for the relay
 
     }
 
@@ -53,9 +53,6 @@ public class RobotTemplate extends SimpleRobot {
     public void operatorControl() {
         compressor.start();
         arm.setSolenoid(-1);
-        //drivetrain=new Drivetrain();
-        //Pan pan= new Pan();
-        //arm= new BowlerArm();
         while (isOperatorControl()) {
             //drivetrain updates
             double lstick = -joystick.getRawAxis(2);
@@ -71,34 +68,14 @@ public class RobotTemplate extends SimpleRobot {
                 pan.resetServo();
             }
 
-            //pan updates version 1 (Chris)
-            // If the button wasn't being pressed before, and is now pressed, will change the state of the servo. (and vice-versa)
-            /*
-            if (pan.getPrevState() != joystick.getRawButton(10)) {
-                pan.set((pan.get() + 1) % 2);
-                pan.changeState();
-            }
-
-            //joystick.getRawButton(10); //what is the purpose of this line?
-             * 
-             */
-            
             //bowler arm updates
-            /*
-            if (joystick.getRawButton(6)) {
-                try {
-                    arm.auto();
-                } catch (InterruptedException ex) {
-                    ex.printStackTrace();
-                }
-            }
-            */
+                                
             if (joystick.getRawButton(7)) {
                 arm.rampDown();
-                //arm.setRamp(1);
             } else if (joystick.getRawButton(5)) {
                 arm.rampUp();
-                //arm.setRamp(-1);
+            } else if (joystick.getRawButton(6)) {
+                   arm.auto();
             } else {
                 arm.setRamp(0);
             }
@@ -110,12 +87,21 @@ public class RobotTemplate extends SimpleRobot {
      *changes the servo state based on the button being pressed. 
      *once it is pressed, it is set to the opposite of what is was at the start, ditto for release. 
      */
-
+    
     /**
      * This function is called once each time the robot enters test mode.
      */
     public void test() {
 
+    }
+    public void updateDrivetrain(){
+        
+    }
+    public void updateArm(){
+        
+    }
+    public void updatePan(){
+        
     }
     public static void sleep(long ms){
         long t=System.currentTimeMillis()+ms;
