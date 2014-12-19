@@ -23,9 +23,9 @@ public class BowlerArm {
 
     private final int ARM_FORWARD_PORT = 1; //orig 0; corrected to 1
     private final int ARM_BACKWARD_PORT = 2; //orig 0; corrected to 2
-    private final double RAMP_SPEED = 0.25;
+    private final double RAMP_SPEED = 0.5;
     private final long RAMP_WAIT = 1000;
-    private final long ARM_WAIT=10;
+    private final long ARM_WAIT = 10;
 
     public BowlerArm() {
         ramp1 = new Jaguar(JAG_PORT_1);
@@ -43,27 +43,38 @@ public class BowlerArm {
             arm.set(DoubleSolenoid.Value.kForward); //forward (out)
         } else if (value == 0) {
             arm.set(DoubleSolenoid.Value.kOff); //off
-        } else if (value == -1){
+        } else if (value == -1) {
             arm.set(DoubleSolenoid.Value.kReverse); //backward (in)
         }
     }
 
-    
     public void setRamp(double value) {
         ramp1.set(value);
         ramp2.set(value);
 
     }
-    
-    public void rampDown(){
+
+    public void rampDown() {
         setRamp(-RAMP_SPEED);
     }
-    
-    public void rampUp(){
+    //overloaded method used if a different speed than normal is needed
+
+    public void rampDown(int speedOffset) {
+        setRamp(-RAMP_SPEED + speedOffset);
+    }
+
+    public void rampUp() {
         setRamp(RAMP_SPEED);
     }
 
-    public void auto()  {
+    //overloaded method used if a different speed than normal is needed
+
+    public void rampUp(int speedOffset) {
+        setRamp(RAMP_SPEED + speedOffset);
+
+    }
+
+    public void auto() {
         //down
         setRamp(RAMP_SPEED); //verify sign to physical direction!!!!!!!!
         RobotTemplate.sleep(ARM_WAIT);
@@ -72,8 +83,7 @@ public class BowlerArm {
         //out
         setSolenoid(1);
         //out
-     
-    
+
         //in
         setSolenoid(-1); //in
         //up
@@ -81,6 +91,5 @@ public class BowlerArm {
         RobotTemplate.sleep(RAMP_WAIT);
         setRamp(0);
     }
-    
 
 }
