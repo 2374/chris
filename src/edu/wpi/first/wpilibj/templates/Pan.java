@@ -38,10 +38,10 @@ public class Pan {
         prevState=!prevState;
     }
     public void endGame(){ //verify directionality
-        walls.set(1); //walls fall
+        walls.set(0); //walls fall //changed from 1 to 0
     }
     public void resetServo(){
-        walls.set(0); //servo resets for next time
+        walls.set(1); //servo resets for next time //changed from 0 to 1
     }
     
   
